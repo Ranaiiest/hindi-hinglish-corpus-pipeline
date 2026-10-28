@@ -1,0 +1,256 @@
+{
+  "code_version": "1.0.0",
+  "config": {
+    "contamination": {
+      "containment": 0.5,
+      "gram_words": 5,
+      "reject_floor": 0.25,
+      "translit_containment": 0.5,
+      "translit_gram": 4,
+      "translit_min_words": 8
+    },
+    "dedup": {
+      "bands": 32,
+      "log_floor": 0.6,
+      "max_bucket": 50,
+      "max_candidates": 200,
+      "num_perm": 128,
+      "rows": 4,
+      "seed": 1,
+      "shingle_words": 3,
+      "threshold": 0.8
+    },
+    "eval": {
+      "max_chars": 600,
+      "min_chars": 60,
+      "min_words": 8,
+      "oversample": 6,
+      "purpose": "held-out Hindi / Hinglish passages for measuring Falcon's per-token loss (perplexity) and next-token quality on Indian-language text",
+      "quota": {
+        "hi": 160,
+        "hi-Latn": 40
+      },
+      "seed": "eval-v1"
+    },
+    "keep_langs": [
+      "hi",
+      "hi-Latn"
+    ],
+    "langid": {
+      "dev_min_frac": 0.4,
+      "dev_mixed_frac": 0.15,
+      "latn_en_min_rate": 0.15,
+      "latn_hi_min_hits": 2,
+      "latn_hi_min_rate": 0.06,
+      "latn_hi_vs_en": 0.4,
+      "marker_min_hits": 2,
+      "marker_min_rate": 0.02
+    },
+    "output": {
+      "shard_docs": 50000
+    },
+    "quality": {
+      "boilerplate_doc_frac": 0.5,
+      "boilerplate_line_maxlen": 100,
+      "contact_maxlen": 1500,
+      "contact_phones_min": 3,
+      "max_char_run_frac": 0.3,
+      "max_latin1_frac": 0.1,
+      "max_markup_frac": 0.05,
+      "max_markup_tags": 3,
+      "max_replacement_chars": 2,
+      "max_top_token_share": 0.25,
+      "min_alpha_frac": 0.4,
+      "min_letters": 6,
+      "min_lines_for_line_check": 8,
+      "min_tokens_for_repeat_checks": 30,
+      "min_unique_line_ratio": 0.3,
+      "min_words": 2,
+      "numeric_table_frac": 0.8,
+      "numeric_table_min_tokens": 6,
+      "spam_density": 0.03,
+      "spam_distinct": 3,
+      "symbol_frac": 0.35,
+      "url_min": 3
+    },
+    "text_fields": [
+      "text",
+      "content",
+      "raw_content",
+      "body",
+      "sentence",
+      "document",
+      "article",
+      "review",
+      "message",
+      "comment"
+    ],
+    "txt_mode": "lines"
+  },
+  "counts": {
+    "dropped_by_stage_and_lang": {
+      "contamination": {
+        "hi": 480,
+        "hi-Latn": 4
+      },
+      "eval_holdout": {
+        "hi": 160,
+        "hi-Latn": 40
+      },
+      "exact_dedup": {
+        "hi": 503
+      },
+      "filter": {
+        "hi": 236,
+        "hi-Latn": 93
+      },
+      "kept": {
+        "hi": 29434,
+        "hi-Latn": 7734
+      },
+      "lang": {
+        "en": 11,
+        "other": 3
+      },
+      "near_dedup": {
+        "hi": 1298,
+        "hi-Latn": 4
+      }
+    },
+    "input_docs": 40000,
+    "kept_docs": 37168,
+    "language_labels_after_langid": {
+      "en": 11,
+      "hi": 32111,
+      "hi-Latn": 7875,
+      "other": 3
+    },
+    "stage_stats": {
+      "s1": {
+        "boilerplate_lines_removed": 1195,
+        "kept": 39657,
+        "n_in": 40000
+      },
+      "s2": {
+        "eval_hi": 160,
+        "eval_hi-Latn": 40,
+        "eval_total": 200
+      },
+      "s3": {
+        "eval_holdout": 200,
+        "exact": 503,
+        "kept": 37652,
+        "near": 1302,
+        "redacted_aadhaar": 9,
+        "redacted_email": 1271,
+        "redacted_phone": 557
+      },
+      "s4": {
+        "by_contained": 483,
+        "by_exact": 1,
+        "eval_items_affected": 15,
+        "kept": 37168,
+        "leaking_train_docs": 484
+      }
+    }
+  },
+  "eval_purpose": "held-out Hindi / Hinglish passages for measuring Falcon's per-token loss (perplexity) and next-token quality on Indian-language text",
+  "inputs": [
+    {
+      "bytes": 50833990,
+      "path": "fineweb2_hin_deva/part-000.parquet",
+      "sha256": "a39530fceebee038d7000ef128deb3e19923337ff9c398df70af30d4e16479d3"
+    },
+    {
+      "bytes": 33317625,
+      "path": "fineweb2_hin_latn/part-000.parquet",
+      "sha256": "d15345723ae852116ef5497072ef1df224e564ed387efac966aac1e2218c2b15"
+    },
+    {
+      "bytes": 27882189,
+      "path": "wikipedia_hi/part-000.parquet",
+      "sha256": "683cfdbfdef26ab21630e5a6d0aa1ca14944044a1589a90f85f2291f495b3677"
+    }
+  ],
+  "output_sha256": {
+    "clean/part-00000.jsonl.gz": "507dde2f64e9a20ea96e33ac16607df05e84fd29840042d1d82649d6c981c979",
+    "contamination.jsonl": "a7242533e8d056848028f3396c9de42f81328a7763fd1362bff1c980c9eda1cd",
+    "eval.jsonl": "2113656093745abd509b8ad6afec9cb0350315011fac94d041d477ef67c6ec7d",
+    "ledger.csv": "8ff4fbbb5e250a9ebdad45ba863effbfc3aa276bb427152ad6b92dfa965d08d8"
+  },
+  "sources": [
+    {
+      "declared": {
+        "dir": "fineweb2_hin_deva",
+        "download_date": "2026-10-27",
+        "license": "ODC-By 1.0 (plus Common Crawl terms of use)",
+        "name": "FineWeb-2 hin_Deva (Hindi web text)",
+        "notes": "web text; source label NOT trusted",
+        "parts": [
+          {
+            "original_file": "data/hin_Deva/train/000_00000.parquet",
+            "original_sha256": "071a6d4cc4b5a21fed9531b2de1bdc8b4be16d38fc35dde41f73b0bd7263adad",
+            "rows_kept": 20000
+          }
+        ],
+        "rows_requested": 20000,
+        "url": "https://huggingface.co/datasets/HuggingFaceFW/fineweb-2"
+      },
+      "docs_in": 20000,
+      "docs_kept": 19793,
+      "raw_bytes": 50833990,
+      "source_dir": "fineweb2_hin_deva"
+    },
+    {
+      "declared": {
+        "dir": "fineweb2_hin_latn",
+        "download_date": "2026-10-27",
+        "license": "ODC-By 1.0 (plus Common Crawl terms of use)",
+        "name": "FineWeb-2 hin_Latn (Hindi in Latin script / Hinglish candidates)",
+        "notes": "Hinglish source; many docs will be English/spam and get dropped by OUR language id",
+        "parts": [
+          {
+            "original_file": "data/hin_Latn/train/000_00000.parquet",
+            "original_sha256": "e26effecb80746f7917d0bc3576eb8aad7287b8e110218e59015851437dc97ea",
+            "rows_kept": 8000
+          }
+        ],
+        "rows_requested": 8000,
+        "url": "https://huggingface.co/datasets/HuggingFaceFW/fineweb-2"
+      },
+      "docs_in": 8000,
+      "docs_kept": 7845,
+      "raw_bytes": 33317625,
+      "source_dir": "fineweb2_hin_latn"
+    },
+    {
+      "declared": {
+        "dir": "wikipedia_hi",
+        "download_date": "2026-10-27",
+        "license": "CC BY-SA 3.0 (+GFDL) - attribution + share-alike",
+        "name": "Hindi Wikipedia (wikimedia/wikipedia, 20231101.hi)",
+        "notes": "Devanagari Hindi; encyclopedic",
+        "parts": [
+          {
+            "original_file": "20231101.hi/train-00000-of-00002.parquet",
+            "original_sha256": "48001d229cb28d1e74c1f6bac76a1d0ccfc2ffa05c8fb9c2201a5b56108e7c58",
+            "rows_kept": 12000
+          }
+        ],
+        "rows_requested": 12000,
+        "url": "https://huggingface.co/datasets/wikimedia/wikipedia"
+      },
+      "docs_in": 12000,
+      "docs_kept": 9530,
+      "raw_bytes": 27882189,
+      "source_dir": "wikipedia_hi"
+    }
+  ],
+  "stage_fingerprints": {
+    "final": "6d68e69e44d1cb03d6e890b80bda555fb1f1cbfbf8754f325b4b7389b7ed3fc5",
+    "s1": "4c8823677ff8f3d3d1c8df9e788cfb8fd0946c57827b970cf821f1689985c77a",
+    "s2": "cfd7cf9809b169bb4025535703a2534551d1f7f8621d44580fbdeb6b5090be33",
+    "s3": "ce7c3fc3b24db0af3ed8daf7ac781bc6f9bc3b9bd47ca7a81a9d43006bb9c1ba",
+    "s4": "29e64862d07bece513b70a247f1465272157ddf2859d83ee70930f025d12cdad"
+  }
+}
